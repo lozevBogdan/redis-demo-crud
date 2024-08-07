@@ -31,8 +31,12 @@ public class OrderDao {
 	public List<Order> findAll() {
 		return template.opsForHash().values(HASH_KEY);
 	}
+	
+	public Order findOrderById(int id) {
+		return (Order) template.opsForHash().get(HASH_KEY,id);
+	}
 
-	public String deleteOrder(Long id) {
+	public String deleteOrder(int id) {
 		template.opsForHash().delete(HASH_KEY, id);
 		return "Order deleted successfully";
 	}
